@@ -4,12 +4,12 @@
 # zip -j fastify-lambda.zip src/index.js
 
 module "fastify_lambda_bff" {
-  source = "../modules/bff"
+  source = "../../modules/bff"
 
   function_name = "fastify-lambda"
   handler       = "index.handler"
   runtime       = "nodejs22.x"
-  source_path   = "../lambda-placeholder/placeholder.zip"
+  source_path   = "../../lambda-placeholder/placeholder.zip"
 
   # When sourcing from S3, provide the bucket and key.
   # The CI/CD pipeline of your application should upload the zip artifact to this location.
