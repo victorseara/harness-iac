@@ -62,6 +62,6 @@ pipeline:
                   spec:
                     shell: Sh
                     command: |
-                      aws lambda update-function-code \ 
-                      --function-name fastify-lambda \ 
+                      aws lambda update-function-code \
+                      --function-name fastify-lambda \
                       --zip-file fileb://lambda.zip
