@@ -47,7 +47,7 @@ pipeline:
                   identifier: Zip
                   spec:
                     shell: Sh
-                    command: zip lambda.zip lambdas/index.js
+                    command: zip lambda.zip lambdas/index.js -j
               - step:
                   type: Run
                   name: List artifacts
