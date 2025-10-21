@@ -53,7 +53,7 @@ pipeline:
                   name: AWS Deploy
                   identifier: AWS_Deploy
                   spec:
-                    uses: aws-actions/aws-lambda-deploy@v1.1.0
+                    uses: victorseara/aws-lambda-deploy@main
                     with:
                       function-name: my-function-name
                       code-artifacts-dir: lambda.zip
