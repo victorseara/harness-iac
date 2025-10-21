@@ -37,6 +37,10 @@ pipeline:
                   identifier: AWS_Login
                   spec:
                     uses: aws-actions/configure-aws-credentials@v3
+                    with:
+                      aws-access-key-id: <+secrets.getValue("AWS_ACCESS_KEY_ID")>
+                      aws-secret-access-key: <+secrets.getValue("AWS_SECRET_ACCESS_KEY")>
+                      aws-region: us-east-1
               - step:
                   type: Run
                   name: Zip
@@ -44,3 +48,14 @@ pipeline:
                   spec:
                     shell: Sh
                     command: zip lambda.zip lambdas/index.js
+              - step:
+                  type: Action
+                  name: AWS Deploy
+                  identifier: AWS_Deploy
+                  spec:
+                    uses: aws-actions/aws-lambda-deploy@v1.1.0
+                    with:
+                      function-name: my-function-name
+                      code-artifacts-dir: lambda.zip
+                      handler: index.handler
+                      runtime: nodejs22.x
