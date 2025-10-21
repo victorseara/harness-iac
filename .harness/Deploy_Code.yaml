@@ -39,7 +39,7 @@ pipeline:
                     uses: aws-actions/configure-aws-credentials@v3
                     with:
                       aws-access-key-id: <+secrets.getValue("AWS_ACCESS_KEY_ID")>
-                      aws-secret-access-key: <+secrets.getValue("AWS_SECRET_ACCESS_KEY")>
+                      aws-secret-access-key: <+secrets.getValue("AWS_Personal_Access_Key")>
                       aws-region: us-east-1
               - step:
                   type: Run
