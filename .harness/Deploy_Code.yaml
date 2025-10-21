@@ -47,7 +47,7 @@ pipeline:
                   identifier: Zip
                   spec:
                     shell: Sh
-                    command: zip dist/lambda.zip lambdas/index.js
+                    command: zip lambda.zip lambdas/index.js
               - step:
                   type: Run
                   name: List artifacts
@@ -56,13 +56,12 @@ pipeline:
                     shell: Sh
                     command: ls -alh
               - step:
-                  type: Action
+                  type: Run
                   name: AWS Deploy
                   identifier: AWS_Deploy
                   spec:
-                    uses: victorseara/aws-lambda-deploy@main
-                    with:
-                      function-name: my-function-name
-                      code-artifacts-dir: dist
-                      handler: index.handler
-                      runtime: nodejs22.x
+                    shell: Sh
+                    command: |
+                      aws lambda update-function-code \ 
+                      --function-name fastify-lambda \ 
+                      --zip-file fileb://lambda.zip
