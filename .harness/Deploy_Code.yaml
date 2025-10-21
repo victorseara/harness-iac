@@ -1,0 +1,46 @@
+pipeline:
+  name: Deploy Code
+  identifier: Deploy_Code
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.VICTORSEARAORG
+        repoName: harness-iac
+        build: <+input>
+  stages:
+    - stage:
+        name: Build and Deploy
+        identifier: Build_and_Deploy
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: true
+          buildIntelligence:
+            enabled: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Action
+                  name: AWS Login
+                  identifier: AWS_Login
+                  spec:
+                    uses: aws-actions/configure-aws-credentials@v3
+              - step:
+                  type: Run
+                  name: Zip
+                  identifier: Zip
+                  spec:
+                    shell: Sh
+                    command: zip lambda.zip lambdas/index.js
