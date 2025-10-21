@@ -49,6 +49,13 @@ pipeline:
                     shell: Sh
                     command: zip lambda.zip lambdas/index.js
               - step:
+                  type: Run
+                  name: List artifacts
+                  identifier: List_artifacts
+                  spec:
+                    shell: Sh
+                    command: ls -alh
+              - step:
                   type: Action
                   name: AWS Deploy
                   identifier: AWS_Deploy
