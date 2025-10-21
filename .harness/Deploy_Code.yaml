@@ -64,4 +64,5 @@ pipeline:
                     command: |
                       aws lambda update-function-code \
                       --function-name fastify-lambda \
-                      --zip-file fileb://lambda.zip
+                      --zip-file fileb://lambda.zip \
+                      --region us-east-1
