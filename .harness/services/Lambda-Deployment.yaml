@@ -1,0 +1,9 @@
+service:
+  name: Lambda Deployment
+  identifier: Lambda_Deployment
+  serviceDefinition:
+    type: AwsLambda
+    spec: {}
+  gitOpsEnabled: false
+  orgIdentifier: default
+  projectIdentifier: default_project
