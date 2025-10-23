@@ -3,7 +3,18 @@ service:
   identifier: Lambda_Deployment
   serviceDefinition:
     type: AwsLambda
-    spec: {}
+    spec:
+      variables:
+        - name: function_name
+          type: String
+          description: ""
+          required: true
+          value: ""
+        - name: handler
+          type: String
+          description: ""
+          required: false
+          value: ""
   gitOpsEnabled: false
   orgIdentifier: default
   projectIdentifier: default_project
