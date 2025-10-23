@@ -66,3 +66,44 @@ pipeline:
                       --function-name fastify-lambda \
                       --zip-file fileb://lambda.zip \
                       --region us-east-1
+    - stage:
+        name: Deploy Lambda
+        identifier: Deploy_Lambda
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: AwsLambda
+          environment:
+            environmentRef: NonProd
+            gitBranch: main
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: Infra
+          execution:
+            steps:
+              - step:
+                  name: Deploy Aws Lambda
+                  identifier: deployawslambda
+                  type: AwsLambdaDeploy
+                  timeout: 10m
+                  spec: {}
+            rollbackSteps:
+              - step:
+                  name: Aws Lambda rollback
+                  identifier: awslambdarollback
+                  type: AwsLambdaRollback
+                  timeout: 10m
+                  spec: {}
+          services:
+            values:
+              - serviceRef: Lambda_Deployment
+                gitBranch: main
+            metadata:
+              parallel: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
