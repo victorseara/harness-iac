@@ -1,0 +1,12 @@
+infrastructureDefinition:
+  name: Infra
+  identifier: Infra
+  orgIdentifier: default
+  projectIdentifier: default_project
+  environmentRef: NonProd
+  deploymentType: AwsLambda
+  type: AwsLambda
+  spec:
+    connectorRef: AWS_Personal
+    region: us-east-2
+  allowSimultaneousDeployments: false
